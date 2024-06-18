@@ -1,0 +1,41 @@
+# Copyright (c) 2023 Golioth, Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+manifest:
+  version: 0.8
+
+  remotes:
+  - name: memfault
+    url-base: https://github.com/memfault
+
+  projects:
+    - name: golioth
+      path: modules/lib/golioth-firmware-sdk
+      revision: 53744bd7700243f2267ef591e8f8924adc7c33e7
+      url: https://github.com/golioth/golioth-firmware-sdk
+      submodules: true
+      import:
+        file: west-zephyr.yml
+        path-prefix: deps
+        name-allowlist:
+          - zephyr
+          - cmsis
+          - hal_espressif
+          - hal_nordic
+          - hal_nxp
+          - mbedtls
+          - mcuboot
+          - net-tools
+          - segger
+          - tfm-mcuboot
+          - tinycrypt
+          - trusted-firmware-m
+          - zcbor
+
+    - name: memfault-firmware-sdk
+      path: deps/modules/lib/memfault-firmware-sdk
+      revision: 1.9.3
+      remote: memfault
+
+  self:
+    path: app
