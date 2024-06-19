@@ -43,6 +43,7 @@ for instructions.
 | Board Name     | OS     |
 |----------------|--------|
 | MIMXRT1024-EVK | Zephyr |
+| nRF9160DK      | NCS    |
 
 ## Running the Application
 
