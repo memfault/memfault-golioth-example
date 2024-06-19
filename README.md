@@ -15,10 +15,17 @@ Memfault.
 This is a Zephyr application managed and built using `west`. To setup your
 environment for building Zephyr apps, follow the [Getting Started guide](https://docs.zephyrproject.org/latest/getting_started/index.html).
 
-Then you can setup your workspace to build this application by running:
+Then you can setup your workspace to build this application by running one of
+the following:
 
+For vanilla Zephyr:
 ```
 west init -m https://github.com/golioth/golioth-memfault-zephyr-example.git
+```
+
+For nRF Connect SDK (NCS):
+```
+west init -m https://github.com/golioth/golioth-memfault-zephyr-example.git --mf west-ncs.yml
 ```
 
 To build the application (see below for a list of supported boards):

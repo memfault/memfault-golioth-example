@@ -1,0 +1,47 @@
+# Copyright (c) 2022-2023 Golioth, Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+manifest:
+  version: 0.8
+
+  remotes:
+  - name: memfault
+    url-base: https://github.com/memfault
+  - name: golioth
+    url-base: https://github.com/golioth
+
+  projects:
+    - name: nrf
+      path: nrf
+      revision: v2.5.2
+      url: https://github.com/nrfconnect/sdk-nrf.git
+      import:
+        path-prefix: deps
+        name-allowlist:
+          - zephyr
+          - cmsis
+          - hal_nordic
+          - mbedtls
+          - mbedtls-nrf
+          - mcuboot
+          - net-tools
+          - nrfxlib
+          - zcbor
+          - segger
+          - tfm-mcuboot
+          - tinycrypt
+          - trusted-firmware-m
+
+    - name: golioth-firmware-sdk
+      path: deps/modules/lib/golioth-firmware-sdk
+      revision: f16fb9ae0e7819973c89a92596298295a22be47c
+      remote: golioth
+      submodules: true
+
+    - name: memfault-firmware-sdk
+      path: deps/modules/lib/memfault-firmware-sdk
+      revision: 1.9.3
+      remote: memfault
+
+  self:
+    path: app
