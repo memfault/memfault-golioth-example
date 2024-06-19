@@ -2,13 +2,29 @@
 
 ## Overview
 
-This application demonstrates how to use the Golioth Firmware SDK and Golioth
-Pipelines to send observability data from the Memfault SDK to Memfault's cloud.
+This application demonstrates how to use the [Golioth Firmware
+SDK](https://github.com/golioth/golioth-firmware-sdk) and [Golioth
+Pipelines](https://docs.golioth.io/data-routing) to send observability data from
+the [Memfault SDK](https://github.com/memfault/memfault-firmware-sdk) to
+Memfault's cloud.
 
 ## Pipelines Setup
 
-This documentation assumes you already have accounts with both Golioth and
-Memfault.
+This documentation assumes you already have accounts with both
+[Golioth](https://console.golioth.io/) and
+[Memfault](https://app.memfault.com/). The [`pipelne.yml`](pipipeline.yml) file
+in this repository contains the source for a pipeline that routes data on the
+`/mflt` path to Memfault. Click the link below to configure it into your Golioth
+project.
+
+<a href='https://console.golioth.io/pipeline?name=Memfault&pipeline=ZmlsdGVyOgogIHBhdGg6ICIvbWZsdCIKICBjb250ZW50X3R5cGU6IGFwcGxpY2F0aW9uL29jdGV0LXN0cmVhbQpzdGVwczoKICAtIG5hbWU6IHN0ZXAwCiAgICBkZXN0aW5hdGlvbjoKICAgICAgdHlwZTogbWVtZmF1bHQKICAgICAgdmVyc2lvbjogdjEKICAgICAgcGFyYW1ldGVyczoKICAgICAgICBwcm9qZWN0X2tleTogJE1FTUZBVUxUX1BST0pFQ1RfS0VZ'>Create Pipeline</a>
+
+> [!NOTE]  
+> Make sure to also create a
+> [secret](https://docs.golioth.io/data-routing/secrets/) named
+> `MEMFAULT_PROJECT_KEY` with your Memfault [project
+> key](https://docs.memfault.com/docs/platform/data-routes/)  to ensure that
+> your pipeline is able to authenticate.
 
 ## Application Setup
 
@@ -26,10 +42,6 @@ To build the application (see below for a list of supported boards):
 ```
 west build -p -b <board_name> app
 ```
-
-You'll need to configure a pipeline in the Golioth Console in order to route
-data to Memfault. See [the documentation](https://docs.golioth.io/data-routing/destinations/memfault/)
-for instructions.
 
 ### Supported Boards
 
