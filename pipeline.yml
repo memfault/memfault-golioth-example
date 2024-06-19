@@ -1,0 +1,10 @@
+filter:
+  path: "/mflt"
+  content_type: application/octet-stream
+steps:
+  - name: step0
+    destination:
+      type: memfault
+      version: v1
+      parameters:
+        project_key: $MEMFAULT_PROJECT_KEY
