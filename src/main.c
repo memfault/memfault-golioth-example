@@ -31,20 +31,6 @@ static void on_golioth_client_event(struct golioth_client *client, enum golioth_
     LOG_INF("Golioth client %s", is_connected ? "connected" : "disconnected");
 }
 
-static char ver_str[sizeof("1.0.0-") + BUILD_ID_LEN] = "1.0.0-";
-
-// A hard-coded set of device information. In production, at minimum the
-// device_serial would usually be device-specific and set at runtime.
-void memfault_platform_get_device_info(sMemfaultDeviceInfo *info) {
-  memfault_build_id_get_string(ver_str + strlen("1.0.0-"), BUILD_ID_LEN + 1);
-  *info = (sMemfaultDeviceInfo){
-      .device_serial = "0123456789",
-      .software_type = "zephyr-app",
-      .software_version = ver_str,
-      .hardware_version = CONFIG_BOARD,
-  };
-}
-
 int main(void)
 {
     LOG_INF("Starting Golioth + Memfault example application");

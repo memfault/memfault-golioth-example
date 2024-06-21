@@ -19,11 +19,12 @@ project.
 
 <a href='https://console.golioth.io/pipeline?name=Memfault&pipeline=ZmlsdGVyOgogIHBhdGg6ICIvbWZsdCIKICBjb250ZW50X3R5cGU6IGFwcGxpY2F0aW9uL29jdGV0LXN0cmVhbQpzdGVwczoKICAtIG5hbWU6IHN0ZXAwCiAgICBkZXN0aW5hdGlvbjoKICAgICAgdHlwZTogbWVtZmF1bHQKICAgICAgdmVyc2lvbjogdjEKICAgICAgcGFyYW1ldGVyczoKICAgICAgICBwcm9qZWN0X2tleTogJE1FTUZBVUxUX1BST0pFQ1RfS0VZ'>Create Pipeline</a>
 
-> [!NOTE]  
+> [!NOTE]
+>
 > Make sure to also create a
 > [secret](https://docs.golioth.io/data-routing/secrets/) named
 > `MEMFAULT_PROJECT_KEY` with your Memfault [project
-> key](https://docs.memfault.com/docs/platform/data-routes/)  to ensure that
+> key](https://docs.memfault.com/docs/platform/data-routes/) to ensure that
 > your pipeline is able to authenticate.
 
 ## Application Setup
@@ -35,39 +36,42 @@ Then you can setup your workspace to build this application by running one of
 the following:
 
 For vanilla Zephyr:
-```
+
+```bash
 west init -m https://github.com/golioth/golioth-memfault-zephyr-example.git
 ```
 
 For nRF Connect SDK (NCS):
-```
+
+```bash
 west init -m https://github.com/golioth/golioth-memfault-zephyr-example.git --mf west-ncs.yml
 ```
 
 To build the application (see below for a list of supported boards):
 
-```
-west build -p -b <board_name> app
+```bash
+west build -p -b <board_name> memfault-golioth-example
 ```
 
 ### Supported Boards
 
-| Board Name     | OS     |
-|----------------|--------|
-| MIMXRT1024-EVK | Zephyr |
-| nRF9160DK      | NCS    |
+| Board Name      | OS              |
+| --------------- | --------------- |
+| MIMXRT1024-EVK  | Zephyr          |
+| esp32s3_devkitm | Zephyr          |
+| nRF9160DK       | nRF-Connect SDK |
 
 ## Running the Application
 
 First flash the application to the board:
 
-```
+```bash
 west flash
 ```
 
 Next, set Golioth credentials through the serial terminal:
 
-```
+```bash
 settings set golioth/psk-id <your_psk_id>
 settings set golioth/psk <your_psk>
 ```
@@ -81,12 +85,14 @@ where it will be routed to Memfault.
 To test the application, you can use the `mflt` menu in the serial console. E.g.:
 
 To trigger a coredump via a hardfault:
-```
+
+```bash
 mflt test hardfault
 ```
 
 To force an immediate heartbeat recording:
-```
+
+```bash
 mflt test heartbeat
 ```
 
@@ -96,6 +102,6 @@ The application registers several RPCs with Golioth that can be used for
 testing and debugging.
 
 - `coredump` - This will remotely trigger an assert on the device to force
-collection of a coredump.
+  collection of a coredump.
 - `memfault_upload` - This will remotely trigger an immediate upload of
-Memfault data.
+  Memfault data.

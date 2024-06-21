@@ -42,7 +42,9 @@ K_TIMER_DEFINE(mflt_upload_timer, mflt_upload_timer_expired, NULL);
 
 static void coredump_timer_expired(struct k_timer *timer)
 {
+    #if !defined(CONFIG_SOC_FAMILY_ESP32)
     memfault_arch_disable_configurable_faults();
+    #endif
     int *bad = (int *) 0;
     *bad = -1;
 }
