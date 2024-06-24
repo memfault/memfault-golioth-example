@@ -11,7 +11,7 @@ manifest:
   projects:
     - name: golioth
       path: modules/lib/golioth-firmware-sdk
-      revision: f16fb9ae0e7819973c89a92596298295a22be47c
+      revision: v0.14.0
       url: https://github.com/golioth/golioth-firmware-sdk
       submodules: true
       import:
