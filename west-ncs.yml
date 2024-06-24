@@ -34,7 +34,7 @@ manifest:
 
     - name: golioth-firmware-sdk
       path: deps/modules/lib/golioth-firmware-sdk
-      revision: f16fb9ae0e7819973c89a92596298295a22be47c
+      revision: v0.14.0
       remote: golioth
       submodules: true
 
