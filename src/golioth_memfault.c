@@ -42,7 +42,9 @@ K_TIMER_DEFINE(mflt_upload_timer, mflt_upload_timer_expired, NULL);
 
 static void coredump_timer_expired(struct k_timer *timer)
 {
+    #if !defined(CONFIG_SOC_FAMILY_ESP32)
     memfault_arch_disable_configurable_faults();
+    #endif
     int *bad = (int *) 0;
     *bad = -1;
 }
@@ -50,7 +52,7 @@ K_TIMER_DEFINE(coredump_timer, coredump_timer_expired, NULL);
 
 /* Golioth RPC for triggering an assert in order to capture a Memfault coredump */
 static enum golioth_rpc_status coredump_rpc(zcbor_state_t *request_params_array,
-                                        zcbor_state_t *respone_detail_map,
+                                        zcbor_state_t *response_detail_map,
                                         void *callback_arg)
 {
     /* Assert after timer expiration to allow time for sending the RPC response */
@@ -61,7 +63,7 @@ static enum golioth_rpc_status coredump_rpc(zcbor_state_t *request_params_array,
 
 /* Golioth RPC for triggering an immediate upload of any pending Memfault data */
 static enum golioth_rpc_status memfault_upload_rpc(zcbor_state_t *request_params_array,
-                                        zcbor_state_t *respone_detail_map,
+                                        zcbor_state_t *response_detail_map,
                                         void *callback_arg)
 {
     /* This function is executed on the Golioth CoAP Client thread. To avoid
