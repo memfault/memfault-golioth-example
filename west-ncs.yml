@@ -20,6 +20,7 @@ manifest:
         name-allowlist:
           - zephyr
           - cmsis
+          - hostap
           - hal_nordic
           - mbedtls
           - mbedtls-nrf

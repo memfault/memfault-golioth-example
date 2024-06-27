@@ -57,9 +57,10 @@ west build -p -b <board_name> app
 
 | Board Name      | OS              |
 | --------------- | --------------- |
-| MIMXRT1024-EVK  | Zephyr          |
-| nRF9160DK       | nRF-Connect SDK |
 | esp32s3_devkitm | Zephyr          |
+| MIMXRT1024-EVK  | Zephyr          |
+| nRF7002DK       | nRF-Connect SDK |
+| nRF9160DK       | nRF-Connect SDK |
 
 ## Running the Application
 
@@ -74,6 +75,13 @@ Next, set Golioth credentials through the serial terminal:
 ```bash
 settings set golioth/psk-id <your_psk_id>
 settings set golioth/psk <your_psk>
+```
+
+If your device is WiFi connected, use the serial terminal to connect to a
+network:
+
+```bash
+wifi connect <ssid> <psk>
 ```
 
 The application is configured to capture Memfault heartbeat metrics once per
