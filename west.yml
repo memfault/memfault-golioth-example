@@ -34,7 +34,7 @@ manifest:
 
     - name: memfault-firmware-sdk
       path: deps/modules/lib/memfault-firmware-sdk
-      revision: 1.9.3
+      revision: 1.9.4
       remote: memfault
 
   self:
