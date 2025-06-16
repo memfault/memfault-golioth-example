@@ -9,6 +9,7 @@ LOG_MODULE_REGISTER(main, LOG_LEVEL_INF);
 
 #include <zephyr/kernel.h>
 #include <zephyr/sys/__assert.h>
+#include <zephyr/settings/settings.h>
 
 #include <golioth/client.h>
 #include <golioth/rpc.h>
@@ -36,6 +37,13 @@ int main(void)
     LOG_INF("Starting Golioth + Memfault example application");
 
     net_connect();
+
+    // Initialize the settings subsystem here in main instead of sys init
+    // to prevent race condition where multiple modules try to initialize it
+    int err = settings_subsys_init();
+    if (err) {
+        LOG_ERR("Failed to initialize settings subsystem: %d", err);
+    }
 
     const struct golioth_client_config *client_config = golioth_sample_credentials_get();
 

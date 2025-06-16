@@ -13,7 +13,7 @@ manifest:
   projects:
     - name: nrf
       path: nrf
-      revision: v2.5.2
+      revision: v2.9.1
       url: https://github.com/nrfconnect/sdk-nrf.git
       import:
         path-prefix: deps
@@ -25,6 +25,7 @@ manifest:
           - mbedtls
           - mbedtls-nrf
           - mcuboot
+          - oberon-psa-crypto
           - net-tools
           - nrfxlib
           - zcbor
@@ -35,13 +36,13 @@ manifest:
 
     - name: golioth-firmware-sdk
       path: deps/modules/lib/golioth-firmware-sdk
-      revision: v0.14.0
+      revision: v0.18.1
       remote: golioth
       submodules: true
 
     - name: memfault-firmware-sdk
       path: deps/modules/lib/memfault-firmware-sdk
-      revision: 1.9.3
+      revision: 1.25.0
       remote: memfault
 
   self:
