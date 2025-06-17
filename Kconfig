@@ -2,3 +2,10 @@
 # SPDX-License-Identifier: Apache-2.0
 
 source "Kconfig.zephyr"
+
+config APP_MEMFAULT_UPLOAD_INTERVAL_SECS
+    int "Memfault upload interval in seconds"
+    default 3600
+    help
+      The interval at which the Memfault agent will attempt to upload data to the Memfault cloud.
+      This is a minimum value; the actual upload may happen less frequently depending on network conditions.

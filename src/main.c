@@ -38,13 +38,6 @@ int main(void)
 
     net_connect();
 
-    // Initialize the settings subsystem here in main instead of sys init
-    // to prevent race condition where multiple modules try to initialize it
-    int err = settings_subsys_init();
-    if (err) {
-        LOG_ERR("Failed to initialize settings subsystem: %d", err);
-    }
-
     const struct golioth_client_config *client_config = golioth_sample_credentials_get();
 
     struct golioth_client *client = golioth_client_create(client_config);

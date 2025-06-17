@@ -15,8 +15,6 @@ LOG_MODULE_REGISTER(golioth_memfault, LOG_LEVEL_DBG);
 
 #include "golioth_memfault.h"
 
-#define TIMER_PERIOD    K_SECONDS(60*60) // 1 hour
-
 struct memfault_work_ctx
 {
     struct k_work work;
@@ -137,7 +135,7 @@ int golioth_memfault_init(struct golioth_client *client, struct golioth_rpc *rpc
     k_work_init(&mflt_ctx.work, memfault_work_handler);
     mflt_ctx.client = client;
     k_timer_user_data_set(&mflt_upload_timer, &mflt_ctx);
-    k_timer_start(&mflt_upload_timer, K_SECONDS(5), TIMER_PERIOD);
+    k_timer_start(&mflt_upload_timer, K_SECONDS(5), K_SECONDS(CONFIG_APP_MEMFAULT_UPLOAD_INTERVAL_SECS));
 
     /* Register RPCs. These aren't necessary for routing Memfault data through
        Golioth, but can be useful for testing and debugging */
