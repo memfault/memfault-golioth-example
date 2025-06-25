@@ -12,4 +12,5 @@ zephyr_include_directories(config)
 target_sources(app PRIVATE
     src/main.c
     src/golioth_memfault.c
+    src/memfault_port.c
 )
