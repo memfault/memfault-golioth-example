@@ -36,7 +36,8 @@ int main(void)
 {
     LOG_INF("Starting Golioth + Memfault example application");
 
-    net_connect();
+    // Disable temporarily for testing purposes
+    // net_connect();
 
     const struct golioth_client_config *client_config = golioth_sample_credentials_get();
 

@@ -6,27 +6,17 @@
 
 #include "memfault/components.h"
 
-void memfault_platform_get_device_info(sMemfaultDeviceInfo *info) {
-  // *NOTE* All strings must be populated, and the values assigned to 
-  // the fields must have static lifetime: the data is accessed when 
-  // this function returns.
-  
-  *info = (sMemfaultDeviceInfo) {
-    // Device serial will be reported by Golioth, therefore set this to a
-    // dummy value
-    .device_serial = "NULL",
-    // Set the device software type- it can be simply "app" for a single-
-    // chip device, otherwise it should match the component name, eg "ble"
-    // "sensor" etc.
-    // This is used to filter data in the Memfault UI
-    .software_type = "app",
-    // Set the device software version.
-    // This is used to filter devices in the Memfault UI. If using Memfault
-    // OTA, this should exactly match the OTA Release Version name for the
-    // installed image.
-    .software_version = "0.0.1-dev",
-    // Set the device hardware revision.
-    // This is used to filter/group devices in the Memfault UI
-    .hardware_version = "evt",
-  };
+// Expand RAM range, e.g. to allow malloc-ed thread TCBs to be included in coredumps
+size_t memfault_platform_sanitize_address_range(void *start_addr, size_t desired_size) {
+  extern uint32_t __kernel_ram_start[];
+  extern uint32_t __kernel_ram_end[];
+
+  const uint32_t ram_start = (uint32_t)__kernel_ram_start;
+  const uint32_t ram_end = (uint32_t)__kernel_ram_end;
+
+  if ((uint32_t)start_addr >= ram_start && (uint32_t)start_addr < ram_end) {
+    return MEMFAULT_MIN(desired_size, ram_end - (uint32_t)start_addr);
+  }
+
+  return 0;
 }
